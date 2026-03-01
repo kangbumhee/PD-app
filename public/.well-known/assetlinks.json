@@ -1,12 +1,8 @@
-[
-  {
-    "relation": ["delegate_permission/common.handle_all_urls"],
-    "target": {
-      "namespace": "android_app",
-      "package_name": "com.pixdap.app",
-      "sha256_cert_fingerprints": [
-        "REPLACE_WITH_YOUR_SHA256_FINGERPRINT"
-      ]
-    }
-  }
-]
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.pixdap.app",
+        "sha256_cert_fingerprints": ["95:46:76:0D:32:42:28:8F:38:97:1B:6C:46:14:FD:D9:2B:84:E0:9B:11:79:1C:7F:BC:E8:9A:ED:EA:0C:E8:99"]
+      }
+    }]
