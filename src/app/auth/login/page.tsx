@@ -5,13 +5,13 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { createSupabaseBrowserClient } from '@/lib/supabase-browser';
 import { detectLocale, t } from '@/i18n';
 import type { Locale } from '@/i18n';
 
-export default function LoginPage() {
+function LoginContent() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [locale, setLocale] = useState<Locale>('en');
@@ -62,7 +62,6 @@ export default function LoginPage() {
         setError(signInError.message);
         setLoading(false);
       }
-      // 리다이렉트되므로 loading은 해제하지 않음
     } catch (err) {
       setError(t('errors.generic', locale));
       setLoading(false);
@@ -148,5 +147,19 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-dark-900 flex items-center justify-center">
+          <div className="w-8 h-8 border-2 border-primary-400 border-t-transparent rounded-full animate-spin" />
+        </div>
+      }
+    >
+      <LoginContent />
+    </Suspense>
   );
 }
