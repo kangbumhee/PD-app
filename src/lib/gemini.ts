@@ -22,9 +22,9 @@ export async function generateImage(
   try {
     const enhancedPrompt = enhancePrompt(userPrompt, styleId);
 
-    // Gemini 2.0 Flash (Nano Banana) - 이미지 생성 지원 모델
+    // Gemini 2.0 Flash preview image generation model
     const model = genAI.getGenerativeModel({
-      model: 'gemini-2.0-flash-exp',
+      model: 'gemini-2.0-flash-exp-image-generation',
       generationConfig: {
         // @ts-ignore - 이미지 생성을 위한 설정
         responseModalities: ['TEXT', 'IMAGE'],
