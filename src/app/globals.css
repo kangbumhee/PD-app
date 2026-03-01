@@ -1,26 +1,89 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ============================================
+   Pixdap 글로벌 스타일
+   ============================================ */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  body {
+    @apply bg-dark-900 text-white antialiased;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* 스크롤바 커스텀 */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-dark-800;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-dark-400 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-dark-300;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* 버튼 기본 스타일 */
+  .btn-primary {
+    @apply px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-xl
+           transition-all duration-200 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed
+           disabled:active:scale-100;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 bg-dark-500 hover:bg-dark-400 text-white font-medium rounded-xl
+           transition-all duration-200 active:scale-95 border border-dark-400;
+  }
+
+  .btn-ghost {
+    @apply px-4 py-2 text-dark-100 hover:text-white hover:bg-dark-600 rounded-lg
+           transition-colors;
+  }
+
+  /* 카드 스타일 */
+  .card {
+    @apply bg-dark-700 rounded-2xl border border-dark-500 p-6;
+  }
+
+  /* 인풋 스타일 */
+  .input-field {
+    @apply w-full px-4 py-3 bg-dark-800 border border-dark-500 rounded-xl text-white
+           placeholder-dark-300 focus:outline-none focus:border-primary-500 focus:ring-1
+           focus:ring-primary-500 transition-colors;
+  }
+
+  /* 쉬머 로딩 애니메이션 */
+  .shimmer {
+    @apply bg-gradient-to-r from-dark-700 via-dark-600 to-dark-700 bg-[length:200%_100%] animate-shimmer;
+  }
+
+  /* 글로우 효과 */
+  .glow {
+    box-shadow: 0 0 20px rgba(76, 110, 245, 0.3);
+  }
+
+  /* 이미지 그리드 */
+  .gallery-grid {
+    @apply grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3;
+  }
+}
+
+@layer utilities {
+  /* 텍스트 그라디언트 */
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary-400 to-primary-200 bg-clip-text text-transparent;
+  }
+
+  /* 안전 영역 (모바일 노치 대응) */
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 16px);
+  }
+
+  .safe-top {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
 }

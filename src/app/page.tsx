@@ -1,65 +1,148 @@
-import Image from "next/image";
+// ============================================
+// 랜딩 페이지 /
+// ============================================
 
-export default function Home() {
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { createSupabaseBrowserClient } from '@/lib/supabase-browser';
+import { detectLocale, t } from '@/i18n';
+import type { Locale } from '@/i18n';
+import Navbar from '@/components/Navbar';
+
+export default function LandingPage() {
+  const [locale, setLocale] = useState<Locale>('en');
+  const [user, setUser] = useState<any>(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    setLocale(detectLocale());
+    const supabase = createSupabaseBrowserClient();
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      setUser(user);
+    });
+  }, []);
+
+  const handleCTA = () => {
+    if (user) {
+      router.push('/generate');
+    } else {
+      router.push('/auth/login');
+    }
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="min-h-screen bg-dark-900">
+      <Navbar />
+
+      {/* 히어로 섹션 */}
+      <section className="pt-24 pb-16 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          {/* 배지 */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary-600/10 border border-primary-600/30 rounded-full mb-6">
+            <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+            <span className="text-primary-300 text-sm font-medium">
+              {locale === 'ko' ? 'AI 이미지 생성기' : 'AI Image Generator'}
+            </span>
+          </div>
+
+          {/* 제목 */}
+          <h1 className="text-4xl md:text-6xl font-bold mb-4 leading-tight">
+            <span className="text-gradient">{t('landing.hero_title', locale)}</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+
+          {/* 부제 */}
+          <p className="text-lg md:text-xl text-dark-100 mb-8 max-w-2xl mx-auto">
+            {t('landing.hero_subtitle', locale)}
+          </p>
+
+          {/* CTA 버튼 */}
+          <button onClick={handleCTA} className="btn-primary text-lg px-8 py-4 glow">
+            {t('landing.cta_button', locale)}
+          </button>
+
+          {/* 무료 안내 */}
+          <p className="mt-4 text-dark-300 text-sm">
+            {locale === 'ko' ? '✨ 가입 시 5크레딧 무료 · 신용카드 불필요' : '✨ 5 free credits on signup · No credit card needed'}
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* 예시 이미지 프리뷰 (플레이스홀더) */}
+      <section className="pb-16 px-4">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {[
+              { style: 'Ghibli', color: 'from-green-500/20 to-blue-500/20' },
+              { style: 'Realistic', color: 'from-orange-500/20 to-red-500/20' },
+              { style: 'Anime', color: 'from-pink-500/20 to-purple-500/20' },
+              { style: 'Cyberpunk', color: 'from-cyan-500/20 to-blue-500/20' },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className={`aspect-square rounded-2xl bg-gradient-to-br ${item.color} border border-dark-500 flex items-center justify-center`}
+              >
+                <span className="text-dark-200 text-sm font-medium">{item.style}</span>
+              </div>
+            ))}
+          </div>
         </div>
-      </main>
+      </section>
+
+      {/* 기능 소개 */}
+      <section className="py-16 px-4 border-t border-dark-700">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-6">
+            {/* 기능 1 */}
+            <div className="card text-center">
+              <div className="text-4xl mb-3">🎨</div>
+              <h3 className="text-lg font-bold mb-2">{t('landing.feature1_title', locale)}</h3>
+              <p className="text-dark-200 text-sm">{t('landing.feature1_desc', locale)}</p>
+            </div>
+
+            {/* 기능 2 */}
+            <div className="card text-center">
+              <div className="text-4xl mb-3">⚡</div>
+              <h3 className="text-lg font-bold mb-2">{t('landing.feature2_title', locale)}</h3>
+              <p className="text-dark-200 text-sm">{t('landing.feature2_desc', locale)}</p>
+            </div>
+
+            {/* 기능 3 */}
+            <div className="card text-center">
+              <div className="text-4xl mb-3">🎁</div>
+              <h3 className="text-lg font-bold mb-2">{t('landing.feature3_title', locale)}</h3>
+              <p className="text-dark-200 text-sm">{t('landing.feature3_desc', locale)}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 하단 CTA */}
+      <section className="py-16 px-4 border-t border-dark-700">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4">
+            {locale === 'ko' ? '지금 바로 시작하세요' : 'Start Creating Now'}
+          </h2>
+          <p className="text-dark-200 mb-6">
+            {locale === 'ko'
+              ? '회원가입만 하면 바로 AI 이미지를 만들 수 있어요'
+              : 'Sign up and start generating AI images instantly'}
+          </p>
+          <button onClick={handleCTA} className="btn-primary text-lg px-8 py-4">
+            {t('landing.cta_button', locale)}
+          </button>
+        </div>
+      </section>
+
+      {/* 푸터 */}
+      <footer className="py-8 px-4 border-t border-dark-700">
+        <div className="max-w-5xl mx-auto text-center">
+          <p className="text-dark-400 text-sm">
+            &copy; 2026 Pixdap. {locale === 'ko' ? '모든 권리 보유.' : 'All rights reserved.'}
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
