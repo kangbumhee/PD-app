@@ -1,0 +1,82 @@
+{
+  "app": {
+    "name": "Pixdap",
+    "tagline": "Create stunning AI images in seconds",
+    "description": "Transform your ideas into beautiful images with the power of AI. Free to start."
+  },
+  "nav": {
+    "home": "Home",
+    "generate": "Generate",
+    "gallery": "Gallery",
+    "profile": "Profile",
+    "login": "Sign In",
+    "logout": "Sign Out"
+  },
+  "landing": {
+    "hero_title": "Turn Words Into Art",
+    "hero_subtitle": "Type a prompt, pick a style, and watch AI create your image in seconds.",
+    "cta_button": "Start Creating — It's Free",
+    "feature1_title": "8+ Art Styles",
+    "feature1_desc": "Ghibli, Anime, Realistic, Pixel Art, Cyberpunk and more",
+    "feature2_title": "Lightning Fast",
+    "feature2_desc": "Generate images in 5-15 seconds with cutting-edge AI",
+    "feature3_title": "Free Credits",
+    "feature3_desc": "Get 5 free credits on signup. Watch ads for more.",
+    "examples_title": "What You Can Create"
+  },
+  "generate": {
+    "title": "Generate Image",
+    "prompt_placeholder": "Describe the image you want to create...",
+    "prompt_label": "Your Prompt",
+    "style_label": "Art Style",
+    "generate_button": "Generate Image",
+    "generating": "Creating your image...",
+    "no_credits": "No credits left",
+    "watch_ad": "Watch Ad for 1 Credit",
+    "download": "Download",
+    "share": "Share",
+    "try_again": "Try Again",
+    "credits_remaining": "Credits: {count}",
+    "prompt_tips": "Tip: Be specific! Include details like colors, mood, setting."
+  },
+  "gallery": {
+    "title": "My Gallery",
+    "empty": "No images yet. Start generating!",
+    "delete": "Delete",
+    "created_at": "Created {date}"
+  },
+  "profile": {
+    "title": "My Profile",
+    "credits": "Credits",
+    "total_generated": "Images Generated",
+    "member_since": "Member Since",
+    "referral_code": "Your Referral Code",
+    "referral_desc": "Share this code with friends. You both get 3 bonus credits!",
+    "copy_code": "Copy Code",
+    "copied": "Copied!",
+    "premium_title": "Go Premium",
+    "premium_desc": "No ads, 200 credits/month, priority generation",
+    "premium_price": "$4.99/month",
+    "premium_button": "Upgrade to Premium"
+  },
+  "auth": {
+    "login_title": "Welcome to Pixdap",
+    "login_subtitle": "Sign in to start creating AI images",
+    "google_login": "Continue with Google",
+    "terms": "By signing in, you agree to our Terms of Service and Privacy Policy."
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again.",
+    "no_credits": "You don't have enough credits. Watch an ad or upgrade to premium.",
+    "generation_failed": "Failed to generate image. Please try a different prompt.",
+    "auth_required": "Please sign in to continue."
+  },
+  "ad": {
+    "loading_title": "Creating Your Image...",
+    "loading_subtitle": "While AI works its magic, here's a quick message",
+    "reward_title": "Watch a short video",
+    "reward_subtitle": "Earn 1 free credit",
+    "reward_button": "Watch Ad (+1 Credit)",
+    "skip": "Skip"
+  }
+}
