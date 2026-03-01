@@ -74,16 +74,23 @@ export default function LandingPage() {
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
-              { style: 'Ghibli', color: 'from-green-500/20 to-blue-500/20' },
-              { style: 'Realistic', color: 'from-orange-500/20 to-red-500/20' },
-              { style: 'Anime', color: 'from-pink-500/20 to-purple-500/20' },
-              { style: 'Cyberpunk', color: 'from-cyan-500/20 to-blue-500/20' },
+              { style: 'Ghibli', color: 'from-green-500/20 to-blue-500/20', image: '/samples/ghibli.png' },
+              { style: 'Realistic', color: 'from-orange-500/20 to-red-500/20', image: '/samples/realistic.png' },
+              { style: 'Anime', color: 'from-pink-500/20 to-purple-500/20', image: '/samples/anime.png' },
+              { style: 'Cyberpunk', color: 'from-cyan-500/20 to-blue-500/20', image: '/samples/cyberpunk.png' },
             ].map((item, i) => (
               <div
                 key={i}
-                className={`aspect-square rounded-2xl bg-gradient-to-br ${item.color} border border-dark-500 flex items-center justify-center`}
+                className="aspect-square rounded-2xl overflow-hidden border border-dark-500 relative"
               >
-                <span className="text-dark-200 text-sm font-medium">{item.style}</span>
+                <img
+                  src={item.image}
+                  alt={item.style}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
+                  <span className="text-white text-sm font-medium">{item.style}</span>
+                </div>
               </div>
             ))}
           </div>
