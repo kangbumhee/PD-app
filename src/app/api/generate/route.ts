@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 // ============================================
 // 이미지 생성 API
 // POST /api/generate

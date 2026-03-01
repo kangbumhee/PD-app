@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 // ============================================
 // 광고 시청 보상 API
 // POST /api/credits/ad-reward

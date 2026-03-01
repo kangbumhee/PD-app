@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 // ============================================
 // 갤러리 API
 // GET /api/gallery - 내 이미지 목록 조회

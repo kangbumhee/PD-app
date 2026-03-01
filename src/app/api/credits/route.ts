@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 // ============================================
 // 크레딧 조회 API
 // GET /api/credits
