@@ -196,7 +196,10 @@ export default function ProfilePage() {
                       <span className="text-lg font-bold text-primary-300">
                         {t('profile.premium_price', locale)}
                       </span>
-                      <button className="btn-primary text-sm px-4 py-2">
+                      <button
+                        onClick={() => alert(locale === 'ko' ? '프리미엄 기능을 준비 중입니다! 곧 출시됩니다 🚀' : 'Premium feature coming soon! 🚀')}
+                        className="btn-primary text-sm px-4 py-2"
+                      >
                         {t('profile.premium_button', locale)}
                       </button>
                     </div>
